@@ -7,5 +7,11 @@ namespace BooksManager.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
+        private readonly BookDbContext _bookContext;
+        public BooksController(BookDbContext bookContext)
+        {
+            _bookContext = bookContext;
+;
+        }
     }
 }
