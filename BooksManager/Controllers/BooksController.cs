@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BooksManager.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BooksManager.Controllers
 {
@@ -12,6 +14,17 @@ namespace BooksManager.Controllers
         {
             _bookContext = bookContext;
 ;
+        }
+
+        // Get : api/Books
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        {
+            if (_bookContext.Books == null)
+            {
+                return NotFound();
+            }
+            return await _bookContext.Books.ToListAsync();
         }
     }
 }
